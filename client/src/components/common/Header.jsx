@@ -8,16 +8,17 @@ export const Header = () => {
   const links = [
     { title: "Home", link: "/" },
     { title: "Books", link: "/books" },
+    { title: "About", link: "/about" },
     { title: "Cart", link: "/cart" },
     { title: "Profile", link: "/profile" },
-    { title: "About", link: "/about" },
-  ];
+    {title:  "Logout",link:"/logout"},
+  ];  
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   console.log(isLoggedIn);
 
   if (isLoggedIn === false) {
-    links.splice(2, 2);
+    links.splice(3, 3);
   }
 
   return (

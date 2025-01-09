@@ -1,30 +1,21 @@
-/*import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { authActions } from '../redux/slices/authSlice'; 
 import { useNavigate } from 'react-router-dom';
-import { resetUser } from '../redux/slices/authSlice';
+import { useEffect } from 'react';
 
 export const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clear user and token from Redux and localStorage
-    dispatch(resetUser());
-    // Redirect to the login page
+    localStorage.removeItem('token');
+
+    // Dispatch logout action
+    dispatch(authActions.logout());
+
+    // Redirect to login page
     navigate('/login');
   }, [dispatch, navigate]);
 
-  return null; // Optionally, you can add a loading spinner or message here
-};*/
-import React from 'react'
-
-export const Logout = () => {
-  return (
-    <div>
-      logout
-    </div>
-  )
-}
-
-
-
+  return null; // No UI component to render for logout
+};
