@@ -1,7 +1,6 @@
 import api from './BaseURL'; 
 
 
-
 export const registerApi = async (userData) => {
     try {
       const response = await api.post("/auth/register", userData);
@@ -27,3 +26,18 @@ export const logoutApi = async () => {
     throw error.response ? error.response.data : { message: "Network error" };
   }
 };
+// Get User Info API
+
+export const getuserInfoApi = async (userId, token) => {
+  try {
+    const response = await api.get(`/auth/getuserInfo/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Pass the token for authentication
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    throw error.response ? error.response.data : { message: 'Network error' };
+  }
+};
+

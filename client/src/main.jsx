@@ -10,8 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+        <Provider store={store}> {/*Provider is an HOC*/ }
+
     <Router> 
-    <Provider store={store}> {/*Provider is an HOC*/ }
       <App />
       <ToastContainer
         position="top-right"
@@ -25,7 +26,8 @@ createRoot(document.getElementById('root')).render(
         pauseOnHover
         theme="colored"
       />
-    </Provider>
     </Router>
+    </Provider>
+
   </StrictMode>
 );

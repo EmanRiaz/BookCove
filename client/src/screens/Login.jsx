@@ -18,6 +18,8 @@ export const Login = () => {
       console.log(response);
       toast.success("Login successful!");
       dispatch(authActions.setUser());
+      dispatch(authActions.changeRole(response.role));
+
       localStorage.setItem('token', response.token);
       localStorage.setItem('userId', response.userId);
       localStorage.setItem('role', response.role);
