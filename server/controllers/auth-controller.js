@@ -85,6 +85,22 @@ const user=async(req,res)=>{
   }
 };
 
+// *---------------------------
+// Get user information Logic
+// *---------------------------
+const getuserInfo = async (req, res) => {
+  try {
+    const { userId } = req.params; 
+    const data = await User.findById(userId).select("-password"); //Exclude password
+    if (!data) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // *-------------------
 // Update Address Logic
 // *-------------------
@@ -122,7 +138,7 @@ const updateAddress = async (req, res) => {
 
   module.exports = {
     home,
-    register,login,user,updateAddress
+    register,login,user,updateAddress,getuserInfo
   };  
 
 

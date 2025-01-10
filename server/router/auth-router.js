@@ -17,6 +17,9 @@ router.route("/login").post(validate(loginSchema),authcontrollers.login);
 //to get users data
 //using middleware to check whether the user is authenticated or not and have a valid token
 router.route("/user").get(authMiddleware,authcontrollers.user);
+//get user information 
+router.route("/getuserInfo/:userId").get( authMiddleware,authcontrollers.getuserInfo);
+
 // Route for updating user address
 router.put("/update-address/:userId", authMiddleware, authcontrollers.updateAddress); // Ensure authMiddleware is applied here
 
