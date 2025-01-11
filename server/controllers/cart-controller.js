@@ -4,23 +4,7 @@ const Book = require("../models/book-model");
 const addToCart = async (req, res) => {
     try {
         const { bookid, id } = req.headers;
-
-        // Ensure `bookid` and `id` are provided
-        if (!bookid || !id) {
-            return res.status(400).json({
-                status: "fail",
-                message: "Book ID and User ID are required",
-            });
-        }
         const userData = await User.findById(id);
-
-        // Check if the user exists
-        if (!userData) {
-            return res.status(404).json({
-                status: "fail",
-                message: "User not found",
-            });
-        }
 
         // Check if the book is already in the cart
         const isBookInCart = userData.cart.includes(bookid);
@@ -42,7 +26,6 @@ const addToCart = async (req, res) => {
         });
     } catch (error) {
         console.error("Error in addToCart:", error);
-        res.status(500).json({ message: "Internal server error" });
     }
 };
 

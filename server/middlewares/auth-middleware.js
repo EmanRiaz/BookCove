@@ -28,13 +28,13 @@ try{
     req.user=userData;
     req.token=token;
     req.userID= userData._id;
-
+/*
     // If the user is not an admin, return "Access Denied"
     if (userData.role !== "admin") {
         return res.status(403).json({ message: "Access denied. You are not an admin." });
       }
+        */
   
-      // Allow the request to continue if everything is fine
     next();
 }catch(error){
     return res.status(401).json({message:"Unauthorized.Invalid token"});
