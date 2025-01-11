@@ -33,8 +33,8 @@ export const Books = () => {
 
   return (
   <>          
-    <div className="bg-black h-auto px-12 py-8">
-      <h4 className="text-3xl text-black font-bold">Books</h4>
+    <div className="bg-white h-auto px-12 py-8">
+      <h4 className="text-3xl text-black font-bold hover:text-yellow-400">Discover Your Bookshelf:</h4>
       {!Data ? (
         <div className="flex items-center justify-center my-8">
           <Loader />

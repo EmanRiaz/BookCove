@@ -15,6 +15,10 @@ import{About } from "./components/homeScreen/About";
 import ViewBookDetails from "./components/ViewBookDetails/ViewBookDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/slices/authSlice";
+import {Favourites} from "./components/Profile/Favourites"
+import {Settings} from "./components/Profile/Settings"
+import {UserOrderHistory} from "./components/Profile/UserOrderHistory"
+
  function App() {
   const dispatch=useDispatch();
   const role=useSelector((state)=>state.auth.role);
@@ -49,7 +53,12 @@ import { authActions } from "./redux/slices/authSlice";
          <Route path="/logout" element={<Logout />} />
          <Route path="/about" element={<About />} />
          <Route path="/cart" element={<Cart />} />
-         <Route path="/profile" element={<Profile />} />
+         <Route path="/profile" element={<Profile />} >
+         <Route index element={<Favourites/>}/>{/*By default move to favourites page*/}
+         <Route path="/profile/orderHistory" element ={<UserOrderHistory/>}/>
+         <Route path="/profile/settings" element ={<Settings/>}/>
+
+         </Route>
          <Route path="view-book-details/:id" element={<ViewBookDetails />} />
        </Routes>
        {hideFooter && <Footer />} 

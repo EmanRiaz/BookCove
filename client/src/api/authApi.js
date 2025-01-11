@@ -27,6 +27,7 @@ export const logoutApi = async () => {
   }
 };
 // Get User Info API
+/*
 
 export const getuserInfoApi = async (userId, token) => {
   try {
@@ -40,4 +41,20 @@ export const getuserInfoApi = async (userId, token) => {
     throw error.response ? error.response.data : { message: 'Network error' };
   }
 };
+*/
+export const getUserInfo = async (userId, token) => {
+  try {
+    const headers = {
+      userId,
+      authorization: `Bearer ${token}`,
+    };
 
+    const response = await api.get(`/auth/getuserInfo/${userId}`, {
+      headers,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user information:", error);
+    throw error; 
+  }
+};

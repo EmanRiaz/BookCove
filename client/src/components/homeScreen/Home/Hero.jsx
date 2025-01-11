@@ -1,7 +1,12 @@
 import React from "react";
 import homeImage from "/src/assets/images/Bookhome.gif";
+import {  useNavigate } from "react-router-dom";
 
 export const Hero = () => {
+  const navigate=useNavigate();
+  const handleBooks=()=>{
+    navigate("/books");
+  }
   return (
     <section
       id="home"
@@ -20,7 +25,8 @@ export const Hero = () => {
         <p className="text-lg mb-8">
           Welcome to the place where bookworms unite to explore the magical realm of knowledge and stories.
         </p>
-        <button className="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-600">
+        <button className="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-600"
+        onClick={handleBooks}>
           Search Books
         </button>
       </div>

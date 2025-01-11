@@ -3,17 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import RegImage from '../assets/images/Register.png';
 import { registerApi } from "../api/authApi";
+import { authActions } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 export const Register = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }  } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
       const response = await registerApi(data);
       console.log(response);
       toast.success("Registration successful!");
-
+      dispatch(authActions.setUser());
+      const userRole = response.role || "user"; 
+      console.log(userRole);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('userId', response.userId);
+      localStorage.setItem('role', response.role);
       setTimeout(() => {
         navigate("/profile");
       }, 3000);

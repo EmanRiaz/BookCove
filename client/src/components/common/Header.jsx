@@ -27,7 +27,7 @@ export const Header = () => {
         {/* Logo and Title */}
         <Link to="/" className="flex items-center">
           <img className="h-10 me-4" src={Mainlogo} alt="BookCove Logo" />
-          <h1 className="text-2xl font-semibold">BookCove</h1>
+          <h1 className="text-2xl hover:text-yellow-400 font-semibold">BookCove</h1>
         </Link>
 
         {/* Desktop Navigation Links */}

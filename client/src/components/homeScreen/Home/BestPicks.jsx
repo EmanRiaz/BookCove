@@ -25,13 +25,13 @@ export const BestPicks = () => {
 
   return (
     <div className="mt-8 px-4">
-      <h4 className="text-3xl text-black font-bold">Best Picks</h4>
+      <h4 className="text-3xl text-black -400 font-bold">Best Picks</h4>
       {!Data && (
         <div className="flex items-center justify-center my-8">
           <Loader />
         </div>
       )}
-      <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-5">
         {Data &&
           Data.map((item, i) => (
             <div key={i}>
