@@ -9,12 +9,12 @@ const authSlice=createSlice({
     logout(state){
       state.isLoggedIn=false;
     },
-    changeRole(state,action){
+    changeRole(state, action){
       const role=action.payload;
       state.role=role;
     },
   },
 });
-export const authActions= authSlice.actions;
+export const authActions = authSlice.actions;
 export default authSlice.reducer;
 

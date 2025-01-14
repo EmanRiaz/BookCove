@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa'; // Importing the icon
 
-export const Sidebar = ({ data ,favourite}) => {
+export const Sidebar = ({ data }) => {
   return (
     <div className="bg-white p-4 flex flex-col items-center justify-between h-[100%]">
       <div className="flex items-center flex-col justify-center">
