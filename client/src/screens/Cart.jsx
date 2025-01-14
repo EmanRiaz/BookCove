@@ -3,9 +3,9 @@ import axios from "axios";
 import Loader from "../components/Loader/Loader";
 import Nocart from "../assets/images/Nocart.png";
 import { AiFillDelete } from "react-icons/ai";
-
+import {  toast } from "react-toastify";  
 export const Cart = () => {
-  const [cart, setCart] = useState(null);
+const [cart, setCart] = useState(null);
 
   const headers = {
     id: localStorage.getItem("userId"),
@@ -28,7 +28,26 @@ export const Cart = () => {
 
     fetchCart();
   }, []);
-
+ 
+    const deleteItem = async (bookid) => {
+      try {
+        const response = await axios.put(
+          "http://localhost:5000/api/cart/remove-from-cart",
+          {},
+          {
+            headers: { ...headers, bookid },
+          }
+        );
+        toast.success(response.data.message);
+    
+        // Refetch cart to reflect the changes
+        setCart((prevCart) => prevCart.filter((item) => item._id !== bookid));
+      } catch (error) {
+        console.error("Error removing item:", error);
+        toast.error("Failed to remove item from the cart.");
+      }
+    };
+    
   
 return (
   <>
@@ -100,6 +119,7 @@ return (
             <div className="w-1/5 flex justify-center">
               <button
                 className="bg-red-100 text-red-700 border border-red-700 rounded p-2 flex items-center"
+                onClick={()=>deleteItem(item._id)}
               >
                 <AiFillDelete />
               </button>
