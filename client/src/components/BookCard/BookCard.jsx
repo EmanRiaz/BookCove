@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {toast} from "react-toastify";
-const BookCard = ({ data, favourite ,onRemove}) => {
-  console.log(data);
+import { toast } from 'react-toastify';
+
+const BookCard = ({ data, favourite, onRemove }) => {
   if (!data) return null; // Safeguard against undefined `data`
 
   const headers = {
@@ -20,7 +20,6 @@ const BookCard = ({ data, favourite ,onRemove}) => {
         { headers }
       );
       toast.success(response.data.message);
-      // Notify parent to update state
       if (onRemove) onRemove(data._id);
     } catch (error) {
       toast.error(
@@ -29,34 +28,43 @@ const BookCard = ({ data, favourite ,onRemove}) => {
       );
     }
   };
-
   return (
-    <div>
-      <Link to={`/view-book-details/${data._id}`}>
-        <div className="bg-black rounded p-2 flex flex-col">
-          <div className="bg-white rounded flex items-center justify-center">
-            <img src={data.url} alt="/" className="h-64" />
-          </div>
-          <h2 className="mt-3 text-yellow-400 text-2xl font-bold">
-            {data.title}
-          </h2>
-          <p className="mt-2 text-white font-normal text-lg hover:text-yellow-400">
-            <b>By :</b> {data.author}
-          </p>
-          <p className="mt-2 text-white font-normal text-lg hover:text-yellow-400">
-            <b>Rs :</b> {data.price}
-          </p>
+
+    <div className="border shadow-md p-4 bg-white">
+    <Link to={`/view-book-details/${data._id}`}>
+      <div className="flex flex-col items-center">
+        {/* Image container with fixed dimensions */}
+        <div className="w-full h-64 overflow-hidden bg-gray-100 flex items-center justify-center">
+          <img
+            src={data.url}
+            alt={data.title}
+            className="w-full h-full object-contain transform transition-transform duration-300 hover:translate-y-2"
+          />
         </div>
-      </Link>
-      {favourite && (
+        {/* Book details */}
+        <h2 className="mt-3 text-yellow-400 text-2xl font-bold  ">
+          {data.title}
+        </h2>
+        <p className="mt-2 text-black font-normal text-lg hover:text-yellow-400 ">
+          <b>By:</b> {data.author}
+        </p>
+        <p className="mt-2 text-black font-normal text-lg hover:text-yellow-400 ">
+          <b>Rs:</b> {data.price}
+        </p>
+        </div>
+    </Link>
+    {favourite && (
+      <div className="flex justify-center mt-4">
         <button
           className="bg-black px-4 py-2 rounded border border-yellow-400 text-yellow-400 hover:text-black hover:bg-white hover:border-black"
           onClick={handleRemoveFavouriteBook}
         >
           Remove from Favourites
         </button>
-      )}
-    </div>
+      </div>
+    )}
+  </div>
+  
   );
 };
 

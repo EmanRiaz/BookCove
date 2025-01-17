@@ -18,7 +18,9 @@ import { authActions } from "./redux/slices/authSlice";
 import {Favourites} from "./components/Profile/Favourites"
 import {Settings} from "./components/Profile/Settings"
 import {UserOrderHistory} from "./components/Profile/UserOrderHistory"
-
+import {ManageOrders} from "./screens/ManageOrders";
+import {UploadBook} from "./screens/UploadBook";
+import {EditBook } from "./screens/EditBook";
  function App() {
   const dispatch=useDispatch();
   const role=useSelector((state)=>state.auth.role);
@@ -54,11 +56,19 @@ import {UserOrderHistory} from "./components/Profile/UserOrderHistory"
          <Route path="/about" element={<About />} />
          <Route path="/cart" element={<Cart />} />
          <Route path="/profile" element={<Profile />} >
-         <Route index element={<Favourites/>}/>{/*By default move to favourites page*/}
+         {role==="user" ? (
+         <Route index element={<Favourites/>}/>
+         ):(
+          <Route index element={<ManageOrders/>}/>
+         )}
+         {role === "admin" && (
+          <Route path="/profile/upload-book" element ={<UploadBook/>}/>
+         )}
          <Route path="/profile/orderHistory" element ={<UserOrderHistory/>}/>
          <Route path="/profile/settings" element ={<Settings/>}/>
 
          </Route>
+         <Route path="/editBook/:id" element={<EditBook />} />
          <Route path="view-book-details/:id" element={<ViewBookDetails />} />
        </Routes>
        {hideFooter && <Footer />} 

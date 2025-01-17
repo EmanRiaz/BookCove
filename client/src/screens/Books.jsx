@@ -30,25 +30,24 @@ export const Books = () => {
   if (error) {
     return <div className="text-black">{error}</div>; // Display error message
   }
-
   return (
-  <>          
-    <div className="bg-white h-auto px-12 py-8">
-      <h4 className="text-3xl text-black font-bold hover:text-yellow-400">Discover Your Bookshelf:</h4>
-      {!Data ? (
-        <div className="flex items-center justify-center my-8">
-          <Loader />
-        </div>
-      ) : (
-        <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {Data.map((item, i) => (
-            <div key={i}>
-              <BookCard data={item} />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-    </>
-  );
-};
+    <>          
+      <div className="bg-white h-auto px-12 py-8">
+        <h4 className="text-3xl text-black font-bold hover:text-yellow-400">Discover Your Bookshelf:</h4>
+        {!Data ? (
+          <div className="flex items-center justify-center my-8">
+            <Loader />
+          </div>
+        ) : (
+          <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {Data.map((item, i) => (
+              <div key={i}>
+                <BookCard data={item} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      </>
+    );
+  };

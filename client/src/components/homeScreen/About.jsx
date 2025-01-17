@@ -1,7 +1,5 @@
 import React from 'react';
 import AboutImage from '../../assets/images/About.jpeg';
-
-
 export const About = () => {
 
   return (
@@ -18,6 +16,8 @@ export const About = () => {
       {/* Greeting Section */}
       <h1 className="text-3xl font-bold text-yellow-400  mx-20  text-left mb-8">
        {/* Welcome {user ? `${user.username} to our website` : `To Our Website`}*/}
+      
+           Welcome to Our Website!
       </h1>
 
       {/* About Section */}

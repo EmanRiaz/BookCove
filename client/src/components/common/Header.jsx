@@ -3,7 +3,6 @@ import Mainlogo from "../../assets/Logos/LogoBC.png";
 import { Link } from "react-router-dom";
 import { FaGripLines } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
 export const Header = () => {
   const links = [
     { title: "Home", link: "/" },
@@ -11,19 +10,27 @@ export const Header = () => {
     { title: "About", link: "/about" },
     { title: "Cart", link: "/cart" },
     { title: "Profile", link: "/profile" },
+    { title: "Admin Profile", link: "/profile" },
     {title:  "Logout",link:"/logout"},
   ];  
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log(isLoggedIn);
-
+  const role =useSelector((state)=>state.auth.role);
   if (isLoggedIn === false) {
-    links.splice(3, 3);
+    links.splice(3, 4);
   }
+  if (isLoggedIn == true && role=== "user")
+    {
+      links.splice(5,1);
+    }
+  if (isLoggedIn == true && role=== "admin")
+  {
+    links.splice(4,1)
 
+  }
   return (
     <>
-      <nav className="z-50 relative flex justify-between items-center bg-black text-white px-8 py-4">
+        <nav className="z-50 relative flex justify-between items-center bg-black text-white px-8 py-4">
         {/* Logo and Title */}
         <Link to="/" className="flex items-center">
           <img className="h-10 me-4" src={Mainlogo} alt="BookCove Logo" />
@@ -31,9 +38,10 @@ export const Header = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="nav-links-bookcove block md:flex items-center gap-4">
+        <div className="nav-links-bookcove block text-xl md:flex items-center gap-4">
           <div className="hidden md:flex gap-4">
             {links.map((item, i) => (
+              
               <Link
                 to={item.link}
                 className="transition-all duration-300 hover:text-yellow-400"

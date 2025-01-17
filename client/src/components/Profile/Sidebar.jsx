@@ -1,46 +1,62 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa'; // Importing the icon
+import { useSelector } from 'react-redux';
+import{authActions} from "../../redux/slices/authSlice";
+import { FaHeart, FaHistory, FaCogs, FaBoxes, FaUpload } from 'react-icons/fa'; 
 
 export const Sidebar = ({ data }) => {
+  const role = useSelector((state) => state.auth.role);
+
   return (
-    <div className="bg-white p-4 flex flex-col items-center justify-between h-[100%]">
-      <div className="flex items-center flex-col justify-center">
-        <img src={data.avatar} alt="User Avatar" className="h-[12vh] rounded-full" />
-        <p className="mt-3 text-xl text-black font-semibold">{data.username}</p>
-        <p className="mt-1 text-normal text-black">{data.email}</p>
-        <div className=" mt-4 bg-white hidden lg:block">
-          <div className="w-full flex-col items-center  text-xl justify-center hidden lg:flex">
+    <div className="bg-black text-white h-full w-64 flex flex-col justify-between">
+      {/* User Info */}
+      <div className="p-4 flex flex-col items-center">
+        <img src={data.avatar} alt="User Avatar" className="h-16 w-16 rounded-full border-2 border-black" />
+        <p className="mt-3 text-lg font-semibold">{data.username}</p>
+        <p className="text-sm text-white">{data.email}</p>
+        <div className="border-t-2 border-white mt-4 w-full" />
+      </div>
+
+      {/* Navigation */}
+      <div className="flex-grow">
+        {role === "user" && (
+          <div>
             <Link
               to="/profile"
-              className="text-black font-semibold w-full py-2 text-center hover:bg-yellow-300 transition-all duration-300"
+              className="flex items-center justify-center gap-2 py-2 px-4 hover:bg-yellow-400 transition duration-300"
             >
-              Favourites
+              <FaHeart /> Favourites
             </Link>
             <Link
               to="/profile/orderHistory"
-              className="text-black font-semibold w-full py-2 mt-4 text-center hover:bg-yellow-300 transition-all duration-300"
+              className="flex items-center justify-center gap-2 py-2 px-4 hover:bg-yellow-400 transition duration-300"
             >
-              Order History
+              <FaHistory /> Order History
             </Link>
             <Link
               to="/profile/settings"
-              className="text-black font-semibold w-full py-2 mt-4 text-center hover:bg-yellow-300 transition-all duration-300"
+              className="flex items-center justify-center gap-2 py-2 px-4 hover:bg-yellow-400 transition duration-300"
             >
-              Settings
+              <FaCogs /> Settings
             </Link>
-            <div>
-              
-            <button
-                className="text-black font-semibold py-2 mt-4 w-full flex items-center justify-center  gap-2 hover:bg-yellow-300 transition-all duration-300"
-              >
-                Logout
-                <FaSignOutAlt className="text-xl" />
-              </button>
-
-            </div>
           </div>
-        </div>
+        )}
+        {role === "admin" && (
+          <div>
+            <Link
+              to="/profile/manage-orders"
+              className="flex items-center justify-center gap-2 py-2 px-4 hover:bg-blue-600 transition duration-300"
+            >
+              <FaBoxes /> Manage Orders
+            </Link>
+            <Link
+              to="/profile/upload-book"
+              className="flex items-center justify-center gap-2 py-2 px-4 hover:bg-blue-600 transition duration-300"
+            >
+              <FaUpload /> Upload Book
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
